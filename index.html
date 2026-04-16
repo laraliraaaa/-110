@@ -21,8 +21,12 @@
         const { useState, useMemo } = React;
 
         // --- 🔑 請在此處填入你的 API KEY ---
-        const apiKey = // const p1 = "AQ.Ab8RN6KakIWQN7IZuazna0S"; const p2 = "oM9QtzQNHcjHQwym6kgdE6ThunQ"; 
-            // const apiKey = p1 +p2;
+        const apiKey = // --- 🔑 API KEY 拼接區 ---
+        const p1 = "AQ.Ab8RN6KakIWQN7IZuazna0S"; // 例如 "AIzaSyB123"
+        const p2 = "oM9QtzQNHcjHQwym6kgdE6ThunQ"; // 例如 "4567890XYZ"
+        
+        const apiKey = p1.trim() + p2.trim(); 
+        // -----------------------
 
 ; 
 
