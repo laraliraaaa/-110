@@ -8,22 +8,28 @@
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/lucide@0.321.0"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap');
-        body { font-family: 'Noto Sans TC', sans-serif; }
+        body { font-family: 'Noto Sans TC', sans-serif; background-color: #fffaf5; }
         .scrollbar-hide::-webkit-scrollbar { display: none; }
     </style>
 </head>
-<body class="bg-orange-50">
+<body>
     <div id="root"></div>
 
     <script type="text/babel">
-        // 從 Lucide 提取圖示
-        const { Search, Phone, Heart, Shield, Sun, MapPin, Briefcase, Users, Zap, BookOpen, ChevronLeft, RefreshCw, Moon, Sparkles } = lucide;
+        // 確保圖示物件存在
+        const { 
+            Search, Phone, Heart, Shield, Sun, MapPin, 
+            Briefcase, Users, Zap, BookOpen, ChevronLeft, 
+            RefreshCw, Moon, Sparkles 
+        } = lucide;
+
         const { useState, useMemo, useEffect } = React;
 
-        const apiKey = "你的_API_KEY_請填在此處"; 
+        // --- 請在此處填入你的 API KEY ---
+        const apiKey = "你的_API_KEY_填在這裡"; 
 
         const scriptureData = [
             { id: 1, title: "當你憂傷時", verse: "約翰福音 14", category: "情感慰藉", icon: <Heart className="w-5 h-5" /> },
@@ -39,4 +45,136 @@
             { id: 11, title: "當你覺得被遺棄、被隔絕時", verse: "羅馬書 8:31-39", category: "情感慰藉", icon: <MapPin className="w-5 h-5" /> },
             { id: 12, title: "當你尋找平安時", verse: "馬太福音 11:25-30", category: "情感慰藉", icon: <Sun className="w-5 h-5" /> },
             { id: 13, title: "當你覺得世界比上帝更大時", verse: "詩篇 90", category: "信心建立", icon: <Zap className="w-5 h-5" /> },
-            {
+            { id: 14, title: "當你需要基督保障時", verse: "羅馬書 8:1-30", category: "信心建立", icon: <Shield className="w-5 h-5" /> },
+            { id: 15, title: "當你出門遠行時", verse: "詩篇 121", category: "生活引導", icon: <MapPin className="w-5 h-5" /> },
+            { id: 16, title: "當你為自己禱告時", verse: "詩篇 87", category: "生活引導", icon: <BookOpen className="w-5 h-5" /> },
+            { id: 17, title: "當你需要勇氣完成工作時", verse: "約書亞記 1", category: "工作挑戰", icon: <Briefcase className="w-5 h-5" /> },
+            { id: 18, title: "當你為投資與通脹思慮時", verse: "馬可福音 10:17-31", category: "生活引導", icon: <Briefcase className="w-5 h-5" /> },
+            { id: 19, title: "當你心情低落時", verse: "詩篇 27", category: "情感慰藉", icon: <Moon className="w-5 h-5" /> },
+            { id: 20, title: "當你銀行戶口結餘是零時", verse: "詩篇 37", category: "生活引導", icon: <Shield className="w-5 h-5" /> },
+            { id: 21, title: "當你對所有人失去信心時", verse: "哥林多前書 13", category: "人際關係", icon: <Users className="w-5 h-5" /> },
+            { id: 22, title: "當你覺得周圍的人不友善時", verse: "約翰福音 15", category: "人際關係", icon: <Users className="w-5 h-5" /> },
+            { id: 23, title: "當你失去盼望時", verse: "詩篇 126", category: "情感慰藉", icon: <Sun className="w-5 h-5" /> },
+            { id: 24, title: "當你覺得世界比你小時", verse: "詩篇 19", category: "信心建立", icon: <Zap className="w-5 h-5" /> },
+            { id: 25, title: "當你希望結出果子時", verse: "約翰福音 15", category: "信心建立", icon: <Sun className="w-5 h-5" /> },
+            { id: 26, title: "保羅擁有的喜樂祕訣", verse: "歌羅西書 3:12-17", category: "情感慰藉", icon: <Heart className="w-5 h-5" /> },
+            { id: 27, title: "當你碰到很好的機遇時", verse: "以賽亞書 55", category: "生活引導", icon: <Zap className="w-5 h-5" /> },
+            { id: 28, title: "當你想與其他人睦相處時", verse: "羅馬書 12", category: "人際關係", icon: <Users className="w-5 h-5" /> },
+        ];
+
+        const categories = ["全部", ...new Set(scriptureData.map(item => item.category))];
+
+        const App = () => {
+            const [view, setView] = useState('list');
+            const [selectedItem, setSelectedItem] = useState(null);
+            const [searchTerm, setSearchTerm] = useState("");
+            const [selectedCategory, setSelectedCategory] = useState("全部");
+            const [scriptureContent, setScriptureContent] = useState("");
+            const [loading, setLoading] = useState(false);
+            const [error, setError] = useState(null);
+
+            const fetchScripture = async (item) => {
+                setLoading(true);
+                setError(null);
+                
+                const prompt = `請提供聖經「${item.verse}」的全文。並針對「${item.title}」給予溫暖的心靈鼓勵。`;
+                
+                try {
+                    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            contents: [{ parts: [{ text: prompt }] }]
+                        })
+                    });
+                    
+                    const result = await response.json();
+                    const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
+                    if (text) {
+                        setScriptureContent(text);
+                    } else {
+                        throw new Error("無回傳內容");
+                    }
+                } catch (err) {
+                    setError("目前無法讀取經文，請確認 API Key 是否設定正確。");
+                } finally {
+                    setLoading(false);
+                }
+            };
+
+            const handleItemClick = (item) => {
+                setSelectedItem(item);
+                setView('reading');
+                fetchScripture(item);
+            };
+
+            const filteredData = scriptureData.filter(item => {
+                const matchesSearch = item.title.includes(searchTerm) || item.verse.includes(searchTerm);
+                const matchesCategory = selectedCategory === "全部" || item.category === selectedCategory;
+                return matchesSearch && matchesCategory;
+            });
+
+            if (view === 'reading') {
+                return (
+                    <div className="max-w-2xl mx-auto p-6">
+                        <button onClick={() => setView('list')} className="mb-6 flex items-center text-stone-500">
+                            <ChevronLeft /> 返回
+                        </button>
+                        <div className="bg-white p-8 rounded-3xl shadow-lg text-center">
+                            <h2 className="text-2xl font-bold mb-2">{selectedItem.title}</h2>
+                            <p className="text-orange-500 mb-6">{selectedItem.verse}</p>
+                            <hr className="mb-6" />
+                            {loading ? <p className="animate-pulse">正在為您翻閱聖經...</p> : 
+                             error ? <p className="text-red-500">{error}</p> :
+                             <div className="text-left whitespace-pre-wrap text-stone-700 leading-loose">{scriptureContent}</div>}
+                        </div>
+                    </div>
+                );
+            }
+
+            return (
+                <div className="max-w-4xl mx-auto px-4 py-10">
+                    <header className="text-center mb-10">
+                        <div className="flex justify-center items-center gap-3 mb-2">
+                            <Phone className="text-orange-500 w-10 h-10" />
+                            <h1 className="text-4xl font-bold">打給耶穌的電話</h1>
+                        </div>
+                        <p className="text-stone-500 italic">"你要呼求我，我就應允你。"</p>
+                    </header>
+
+                    <div className="mb-8 flex flex-col md:flex-row gap-4">
+                        <input 
+                            className="flex-1 p-3 rounded-xl border border-stone-200 outline-none focus:ring-2 focus:ring-orange-200"
+                            placeholder="搜尋心情..."
+                            value={searchTerm}
+                            onChange={e => setSearchTerm(e.target.value)}
+                        />
+                        <div className="flex gap-2 overflow-x-auto pb-2">
+                            {categories.map(cat => (
+                                <button 
+                                    key={cat}
+                                    onClick={() => setSelectedCategory(cat)}
+                                    className={`px-4 py-2 rounded-full whitespace-nowrap ${selectedCategory === cat ? 'bg-orange-500 text-white' : 'bg-white border'}`}
+                                >{cat}</button>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {filteredData.map(item => (
+                            <div key={item.id} onClick={() => handleItemClick(item)} className="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md cursor-pointer border border-stone-100 transition-all">
+                                <div className="text-orange-500 mb-4">{item.icon}</div>
+                                <h3 className="font-bold text-lg mb-1">{item.title}</h3>
+                                <p className="text-stone-400 text-sm">{item.verse}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
