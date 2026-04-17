@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>打給耶穌的電話 - 深度靈修版</title>
+    <title>打給耶穌的電話</title>
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -18,7 +18,7 @@
     <div id="root"></div>
 
     <script type="text/babel">
-        const { useState, useMemo } = React;
+        const { useState, useMemo, useEffect } = React;
 
         const scriptureData = [
             { 
@@ -27,7 +27,10 @@
                 verse: "約翰福音 14:1-3", 
                 category: "情感慰藉", 
                 icon: "❤️", 
-                content: `【經文故事】\n當時耶穌正與門徒進行最後的晚餐，祂剛預言了自己即將離去。門徒們感到前所未有的迷惘與恐懼，甚至連最親近的門徒都可能跌倒。在這憂傷沈重的氛圍中，耶穌沒有責備他們的軟弱，反而溫柔地向他們保證：祂的離開是為了「預備一個更好的地方」。\n\n【深度導讀】\n憂傷往往來自於「失去控制感」與「分離感」。門徒覺得失去了依靠，但耶穌將他們的目光從眼前的分離轉向永恆的承諾。祂強調「信心」是醫治憂愁的良藥——信神，也信祂。這代表即便環境沒有改變，我們與上帝的關係依然是穩固的錨。\n\n【長效禱告】\n親愛的主耶穌，我知道你明白我此刻內心的沈重，因為你也曾在世上經歷過極大的憂傷。求你赦免我因恐懼而對你產生的懷疑，求你的聖靈現在就進入我的心房，撫平那陣陣波浪。主啊，我願意將我的心交給你，求你帶領我跨越眼前的悲傷，讓我看見你在我生命中預備的避風港。奉主耶穌基督的名求，阿門。\n\n【溫馨鼓勵】\n今天給自己一點時間，安靜地呼吸。試著寫下三個你依然擁有的恩典，哪怕是微小的陽光或一杯溫水。請記住：憂傷只是生命的一段隧道，而不是終點，耶穌正牽著你的手走在其中。` 
+                story: "當時耶穌正與門徒進行最後的晚餐，祂剛預言了自己即將離去。門徒們感到前所未有的迷惘與恐懼。在這憂傷沈重的氛圍中，耶穌溫柔地向他們保證：祂的離開是為了「預備一個更好的地方」。",
+                needs: "憂傷往往來自於「失去控制感」。門徒覺得失去了依靠，但耶穌將他們的目光從眼前的分離轉向永恆的承諾。祂強調「信心」是醫治憂愁的良藥——信神，也信祂。這代表即便環境沒有改變，我們與上帝的關係依然是穩固的錨。",
+                pray: "親愛的主耶穌，我知道你明白我此刻內心的沈重，因為你也曾在世上經歷過極大的憂傷。求你赦免我因恐懼而對你產生的懷疑，求你的聖靈現在就進入我的心房，撫平那陣陣波浪。主啊，我願意將我的心交給你，求你帶領我跨越眼前的悲傷，讓我看見你在我生命中預備的避風港。奉主耶穌基督的名求，阿門。",
+                lovesYou: "今天給自己一點時間，安靜地呼吸。試著寫下三個你依然擁有的恩典，哪怕是微小的陽光或一杯溫水。請記住：憂傷只是生命的一段隧道，而不是終點，耶穌正牽著你的手走在其中。" 
             },
             { 
                 id: 2, 
@@ -35,7 +38,10 @@
                 verse: "詩篇 27:10", 
                 category: "情感慰藉", 
                 icon: "👥", 
-                content: `【經文故事】\n大衛在寫這篇詩時，正處於被敵人圍攻、甚至可能被親信背叛的極端險境。在當時的希伯來文化中，父母是最終的保護者，若連父母都離棄，那代表徹底的孤立。但大衛卻展現了驚人的信心：即便人間最穩固的關係斷裂，上帝的「收留」依然是永恆的保障。\n\n【深度導讀】\n人的愛往往是有條件、有極限的。當我們對人抱持過高期待時，失望便隨之而來。這節經文提醒我們，不要將安全感建築在變幻莫測的人際關係上。上帝的愛是一種「收留」，如同避風港接納受傷的船隻，祂不會因為你的表現或環境的改變而轉身離開。\n\n【長效禱告】\n親愛的天父，在被遺棄或被誤解的時刻，我的心感到陣陣刺痛。求你醫治我因人的言語或行為所受的創傷。主啊，謝謝你應許永遠不撇下我，也不丟棄我。當我覺得世界對我關上門時，求你讓我看見你張開的雙臂。求你賜我力量去饒恕那些令我失望的人，因為我知道你已經給了我最完整的愛。奉主耶穌的名求，阿門。\n\n【溫馨提醒】\n今天不要過度檢討自己為什麼「被留下」。找一個大自然的角落走走，感受天父為你創造的世界。你是被愛、被接納的，這份價值不取決於別人的評分，而是取決於造物主的定義。` 
+                story: "大衛在寫這篇詩時，正處於被敵人圍攻、甚至可能被親信背叛的險境。在當時文化中，父母是最終保護者，若連父母都離棄，那代表徹底的孤立。但大衛深信：即便人間最穩固的關係斷裂，上帝的「收留」依然是永恆的保障。",
+                needs: "人的愛往往是有極限的。當我們對人抱持過高期待時，失望便隨之而來。這提醒我們，不要將安全感建築在變幻莫測的人際關係上。上帝的愛是一種「收留」，如同避風港接納受傷的船隻，祂不會因為你的表現而轉身離開。",
+                pray: "親愛的天父，在被遺棄或被誤解的時刻，我的心感到陣陣刺痛。求你醫治我因人的言語或行為所受的創傷。主啊，謝謝你應許永遠不撇下我。當我覺得世界對我關上門時，求你讓我看見你張開的雙臂。求你賜我力量去饒恕那些令我失望的人，因為我知道你已經給了我最完整的愛。奉主耶穌的名求，阿門。",
+                lovesYou: "今天不要過度檢討自己為什麼「被留下」。找一個大自然的角落走走，感受天父為你創造的世界。你是被愛、被接納的，這份價值不取決於別人的評分，而是取決於造物主的定義。" 
             },
             { 
                 id: 3, 
@@ -43,7 +49,10 @@
                 verse: "詩篇 23:4", 
                 category: "情感慰藉", 
                 icon: "🛡️", 
-                content: `【經文故事】\n大衛曾是一名牧羊人，他深知羊群在黑暗的山谷中是多麼無助。在巴勒斯坦，有些峽谷深不見日，野獸常出沒其中。牧羊人會用「杖」來抵禦外敵，用「竿」來引導羊群。當大衛說「不怕遭害」時，並非環境不危險，而是因為看見了牧羊人的存在。\n\n【深度導讀】\n孤單與懼怕往往是一對孿生兄弟。我們害怕黑暗，是因為覺得只有自己一個人在面對。但經文說「你與我同在」，主不是在谷口等你，而是「行過」幽谷——祂就在你身邊。祂的管教（竿）和保護（杖）讓你即便在看不見路的時候，也能感受到方向與安全感。\n\n【長效禱告】\n親愛的大牧者耶穌，在我的黑夜裡，我承認我感到戰兢與孤單。我看不到前面的路，也聽到了恐懼的聲音。但我選擇相信你的話語：你現在就在我身旁。求你用你的杖保護我免受仇敵的攻擊，用你的竿輕輕引導我，不讓我走偏。主啊，賜我靈裡的平安，讓我能在敵人的面前安然坐下。奉主耶穌的名求，阿門。\n\n【溫馨鼓勵】\n如果你感到懼怕，試著大聲讀出這段經文。聲音能幫助我們找回現實感。提醒自己：這段「死蔭的幽谷」只是通往「青草地」的路徑。你並非孤身一人，那位戰勝死亡的主正為你開路。` 
+                story: "大衛曾是牧羊人，他知羊群在黑暗山谷中是多麼無助。牧羊人會用「杖」抵禦外敵，用「竿」引導羊群。當大衛說「不怕遭害」時，並非環境不危險，而是因為看見了牧羊人的存在。",
+                needs: "孤單與懼怕常並存。我們害怕黑暗，是因為覺得只有自己在面對。但經文說「你與我同在」，主不是在谷口等你，而是「行過」幽谷——祂就在你身邊。祂的管教和保護讓你即便看不見路，也能感受方向。",
+                pray: "親愛的大牧者耶穌，在我的黑夜裡，我承認我感到戰兢與孤單。我看不到前面的路，但我選擇相信你的話語：你現在就在我身旁。求你用你的杖保護我免受攻擊，用你的竿輕輕引導我，不讓我走偏。賜我靈裡的平安，讓我能在敵人的面前安然坐下。奉主耶穌的名求，阿門。",
+                lovesYou: "如果你感到懼怕，試著大聲讀出這段經文。聲音能幫助我們找回現實感。提醒自己：這段「死蔭的幽谷」只是通往「青草地」的路徑。你並非孤身一人，那位戰勝死亡的主正為你開路。" 
             },
             { 
                 id: 4, 
@@ -51,7 +60,10 @@
                 verse: "馬太福音 6:34", 
                 category: "情感慰藉", 
                 icon: "⚡", 
-                content: `【經文故事】\n耶穌在山上寶訓中對著一群貧苦的百姓講話。那時的人們每天都在煩惱：明天還有沒有餅吃？有沒有衣服穿？當時羅馬的賦稅沈重。耶穌指著天空的飛鳥和野地的百合花，告訴他們：如果這些微小的受造物都能被天父眷顧，你們豈不比牠們更貴重嗎？\n\n【深度導讀】\n憂慮本質上是對未來的一種「虛擬負載」。我們把明天的重擔提早借到今天來背，結果導致今天體力透支。耶穌並非教導我們不負責任，而是教導我們「信任的優先順序」。當我們專注於今天的本分，上帝會負責那些我們無法控制的明天。每一天都有專屬的恩典，不要浪費在明天的幻想中。\n\n【長效禱告】\n主啊，我承認我的心常常跑得比你還快，我總是在擔憂那些還沒發生的事。求你赦免我不信任你的信實。主啊，我要把我的經濟、我的家庭、我的未來，通通交託在你的手中。求你賜我智慧處理今天的事，並賜我安穩的心睡今晚的覺。我相信你既然供應了天空的飛鳥，也必照樣供應我。奉主耶穌的名求，阿門。\n\n【溫馨提醒】\n試著做一個練習：把擔憂的事寫在一張紙上，然後放在盒子裡，告訴自己「這是我交給上帝的清單」。接著去做一件能讓你快樂的小事。你的憂慮無法讓頭髮變長一吋，但信靠可以讓你的心放寬一碼。` 
+                story: "耶穌對著貧苦百姓講話。那時人們每天煩惱：還有沒有餅吃？耶穌指著天空的飛鳥和野地的百合花，告訴他們：如果這些微小的受造物都能被天父眷顧，你們豈不比牠們更貴重嗎？",
+                needs: "憂慮是對未來的一種「虛擬負載」。我們把明天的重擔提早借到今天背，導致體力透支。耶穌教導我們「信任的優先順序」。當我們專注於今天的本分，上帝會負責那些我們無法控制的明天。",
+                pray: "主啊，我承認我的心常常跑得比你還快，我總是在擔憂那些還沒發生的事。求你赦免我不信任你的信實。主啊，我要把我的經濟、我的家庭、我的未來，通通交託在你的手中。賜我智慧處理今天的事，賜我安穩的心睡今晚的覺。我相信你既然供應飛鳥，也必供應我。奉主耶穌的名求，阿門。",
+                lovesYou: "做個練習：把擔憂的事寫在紙上放進盒子裡，告訴自己「這是交給上帝的清單」。接著去做一件讓你快樂的小事。你的憂慮無法讓頭髮變長一吋，但信靠可以讓你的心放寬一碼。" 
             },
             { 
                 id: 5, 
@@ -59,9 +71,11 @@
                 verse: "詩篇 51:10-12", 
                 category: "認罪悔改", 
                 icon: "🛡️", 
-                content: `【經文故事】\n這是大衛一生中最痛心的時刻。身為一國之君，他犯了嚴重的道德錯誤。當先知拿單指出他的罪時，大衛沒有找藉口辯解，而是寫下了這篇痛徹心扉的懺悔詩。他深知罪惡不僅傷害了人，更隔絕了他與上帝那份寶貴的關係。他求的不是保留王位，而是求上帝不要收回聖靈。\n\n【深度導讀】\n罪帶來的最大折磨是「羞愧感」和「自我嫌惡」。我們常覺得自己太髒了，不配回到神面前。但這節經文的核心是上帝的「創造力」——求你為我「造」清潔的心。這代表我們無法靠自己變乾淨，唯有上帝能像創造天地一樣，在我們荒涼的生命中創造出全新的聖潔。祂不只赦免，祂還修復。\n\n【長效禱告】\n親愛的主，我的靈魂因著我的過犯感到沈重與不安，我不敢抬頭仰望你的面。主啊，我知道我錯了，我傷害了你，也傷害了周圍的人。求你按著你豐盛的慈愛抹去我的過犯。求你為我造一顆清潔的心，並賜我正直、剛強的靈來抵擋誘惑。主啊，求你再次將救恩的喜樂賜給我，讓我能重新站立，用我的生命見證你的慈愛。奉主耶穌的名求，阿門。\n\n【溫馨鼓勵】\n認罪不是為了定罪，而是為了得醫治。上帝已經在十字架上付了代價，祂並不驚訝於你的軟弱。今天就接受祂的寬恕，給自己一個重新開始的機會。不要帶著昨天的泥濘走向明天。` 
+                story: "大衛犯了嚴重的道德錯誤。當先知指出罪時，大衛沒有找藉口，而是寫下這篇懺悔詩。他深知罪惡不僅傷害了人，更隔絕了他與上帝寶貴的關係。他求的是上帝不要收回聖靈。",
+                needs: "罪帶來的最大折磨是「羞愧感」。我們常覺得自己太髒不配回神面前。但經文核心是上帝的「創造力」——為我「造」清潔的心。這代表我們無法靠自己變乾淨，唯有上帝能修復並創造全新的聖潔。",
+                pray: "親愛的主，我的靈魂因過犯沈重不安，我不敢抬頭仰望你。主啊，我知道我錯了，傷害了你與周圍的人。求你按豐盛慈愛抹去過犯。為我造清潔的心，賜我正直的靈抵擋誘惑。賜我救恩喜樂，讓我能重新站立，見證你的慈愛。奉主耶穌的名求，阿門。",
+                lovesYou: "認罪不是為了定罪，而是為了得醫治。上帝已經在十字架上付了代價，祂並不驚訝於你的軟弱。今天就接受寬恕，給自己一個重新開始的機會。不要帶著昨天的泥濘走向明天。" 
             }
-            // ... 後續 23 組可以依照此模板擴充
         ];
 
         const categories = ["全部", ...new Set(scriptureData.map(item => item.category))];
@@ -71,9 +85,11 @@
             const [selectedItem, setSelectedItem] = useState(null);
             const [searchTerm, setSearchTerm] = useState("");
             const [selectedCategory, setSelectedCategory] = useState("全部");
+            const [showPray, setShowPray] = useState(false);
 
             const handleItemClick = (item) => {
                 setSelectedItem(item);
+                setShowPray(false); // 切換時重置禱告狀態
                 setView('reading');
                 window.scrollTo(0, 0);
             };
@@ -87,89 +103,69 @@
             if (view === 'reading') {
                 return (
                     <div className="max-w-2xl mx-auto p-4 py-10 min-h-screen">
-                        <button onClick={() => setView('list')} className="mb-6 flex items-center text-stone-500 hover:text-orange-500 font-medium transition-colors">
-                           ⬅️ 返回清單
+                        <button onClick={() => setView('list')} className="mb-6 flex items-center text-stone-400 hover:text-orange-500 transition-colors">
+                           ⬅️ Back to Menu
                         </button>
-                        <div className="bg-white p-8 md:p-12 rounded-3xl shadow-xl border border-stone-100 animate-in fade-in zoom-in duration-300">
-                            <div className="text-center mb-8">
-                                <div className="text-5xl mb-4">{selectedItem.icon}</div>
+                        <div className="bg-white p-8 md:p-12 rounded-[2.5rem] shadow-xl border border-stone-50 transition-all duration-500">
+                            <div className="text-center mb-10">
+                                <div className="text-5xl mb-4 p-4 bg-orange-50 inline-block rounded-3xl">{selectedItem.icon}</div>
                                 <h2 className="text-3xl font-bold text-stone-900 mb-2">{selectedItem.title}</h2>
                                 <p className="text-orange-500 font-bold text-xl">{selectedItem.verse}</p>
                             </div>
-                            <hr className="mb-8 border-stone-100" />
-                            <div className="whitespace-pre-wrap leading-loose text-stone-700 text-lg space-y-6">
-                                {selectedItem.content.split('\n\n').map((paragraph, index) => {
-                                    if (paragraph.startsWith('【')) {
-                                        return <h3 key={index} className="text-orange-600 font-bold text-xl mt-6 mb-2">{paragraph}</h3>;
-                                    }
-                                    return <p key={index} className="mb-4">{paragraph}</p>;
-                                })}
-                            </div>
-                            <div className="mt-12 text-center">
-                                <button 
-                                    onClick={() => setView('list')}
-                                    className="bg-orange-500 text-white px-8 py-3 rounded-full font-bold shadow-lg hover:bg-orange-600 transition-all hover:scale-105"
-                                >
-                                    感謝主，平安回到清單
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                );
-            }
 
-            return (
-                <div className="max-w-4xl mx-auto px-4 py-12">
-                    <header className="text-center mb-12">
-                        <div className="flex justify-center items-center gap-3 mb-4">
-                            <span className="text-5xl">📞</span>
-                            <h1 className="text-4xl font-extrabold text-stone-900 tracking-tight text-orange-600">打給耶穌的電話</h1>
-                        </div>
-                        <p className="text-stone-500 italic font-medium">"你要呼求我，我就應允你。" — 耶利米書 33:3</p>
-                    </header>
+                            <div className="space-y-8 text-stone-700 leading-loose">
+                                <div>
+                                    <h3 className="text-orange-600 font-bold text-xl mb-3 flex items-center gap-2">
+                                        <span className="w-1.5 h-6 bg-orange-500 rounded-full"></span>
+                                        The Bible says...
+                                    </h3>
+                                    <p className="text-lg bg-stone-50 p-6 rounded-2xl italic border-l-4 border-stone-200">
+                                        {selectedItem.story}
+                                    </p>
+                                </div>
 
-                    <div className="mb-10 flex flex-col md:flex-row gap-4">
-                        <input 
-                            className="flex-1 p-4 rounded-2xl bg-white border border-stone-200 shadow-sm outline-none focus:ring-2 focus:ring-orange-300 transition-all text-lg"
-                            placeholder="搜尋心情 (例如：憂慮、犯錯...)"
-                            value={searchTerm}
-                            onChange={e => setSearchTerm(e.target.value)}
-                        />
-                        <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
-                            {categories.map(cat => (
-                                <button 
-                                    key={cat}
-                                    onClick={() => setSelectedCategory(cat)}
-                                    className={`px-5 py-2 rounded-full whitespace-nowrap font-bold transition-all ${
-                                        selectedCategory === cat ? 'bg-orange-500 text-white shadow-md' : 'bg-white text-stone-500 border border-stone-200 hover:bg-orange-50'
-                                    }`}
-                                >{cat}</button>
-                            ))}
-                        </div>
-                    </div>
+                                <div>
+                                    <h3 className="text-orange-600 font-bold text-xl mb-3 flex items-center gap-2">
+                                        <span className="w-1.5 h-6 bg-orange-500 rounded-full"></span>
+                                        And you needs...
+                                    </h3>
+                                    <p className="text-lg">
+                                        {selectedItem.needs}
+                                    </p>
+                                </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {filteredData.map(item => (
-                            <div 
-                                key={item.id} 
-                                onClick={() => handleItemClick(item)} 
-                                className="group bg-white p-7 rounded-3xl shadow-sm hover:shadow-xl cursor-pointer border border-stone-50 transition-all transform hover:-translate-y-1"
-                            >
-                                <div className="text-3xl mb-4 p-3 bg-orange-50 inline-block rounded-2xl group-hover:bg-orange-500 transition-colors group-hover:scale-110">{item.icon}</div>
-                                <h3 className="font-bold text-xl text-stone-800 mb-1">{item.title}</h3>
-                                <p className="text-stone-400 font-medium mb-6">{item.verse}</p>
-                                <div className="text-orange-500 font-bold flex items-center gap-1">
-                                    接通電話 ➜
+                                {!showPray ? (
+                                    <div className="py-6 text-center">
+                                        <button 
+                                            onClick={() => setShowPray(true)}
+                                            className="px-10 py-4 bg-stone-900 text-white rounded-full font-bold shadow-xl hover:bg-orange-600 transition-all transform hover:scale-105 active:scale-95 flex items-center gap-3 mx-auto"
+                                        >
+                                            <span className="text-xl">🙏</span> Let's Pray
+                                        </button>
+                                    </div>
+                                ) : (
+                                    <div className="animate-in slide-in-from-bottom-4 duration-500">
+                                        <h3 className="text-orange-600 font-bold text-xl mb-3 flex items-center gap-2">
+                                            <span className="w-1.5 h-6 bg-orange-500 rounded-full"></span>
+                                            Pray
+                                        </h3>
+                                        <div className="bg-orange-50 p-8 rounded-[2rem] text-stone-800 text-lg leading-loose shadow-inner italic border border-orange-100">
+                                            {selectedItem.pray}
+                                        </div>
+                                    </div>
+                                )}
+
+                                <div>
+                                    <h3 className="text-orange-600 font-bold text-xl mb-3 flex items-center gap-2">
+                                        <span className="w-1.5 h-6 bg-orange-500 rounded-full"></span>
+                                        God loves you.
+                                    </h3>
+                                    <p className="text-lg text-stone-600 bg-white border border-stone-100 p-6 rounded-2xl shadow-sm">
+                                        {selectedItem.lovesYou}
+                                    </p>
                                 </div>
                             </div>
-                        ))}
-                    </div>
-                </div>
-            );
-        };
 
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<App />);
-    </script>
-</body>
-</html>
+                            <div className="mt-16 text-center border-t border-stone-100 pt-10">
+                                <button 
+                                    onClick={() => setView
