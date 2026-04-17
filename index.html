@@ -75,7 +75,7 @@
                 story: "大衛驚嘆神的無所不在。無論在高山或深海，上帝都在那裡引導扶持。",
                 needs: "上帝的存在超越感覺。祂就在你的呼吸間。你需要的只是意識到祂一直看著你。",
                 pray: "天父，求開我的靈眼。無論我往哪裡去，你都在那裡。謝謝你從未放棄與我連結。阿門。",
-                lovesYou: "觸摸你的脈搏。那每一次跳動都是生命之主的眷顧。祂就在你邊。"
+                lovesYou: "觸摸你的脈搏。那每一次跳動都是生命之主的眷顧。祂就在你身邊。"
             },
             { 
                 id: 9, title: "當你的信心需要鼓勵", verse: "希伯來書 11:1", category: "信心建立", icon: "✨", 
@@ -150,8 +150,7 @@
             { 
                 id: 19, title: "當你感到孤單時", verse: "馬太福音 28:20", category: "情感慰藉", icon: "🚶", 
                 story: "耶穌承諾透過聖靈，直到世界的末了，祂都會與祂的百姓同在。",
-                needs: "孤單是因為覺得沒人懂。耶穌經歷過最深的孤獨，祂現在正陪著你、聽你嘆息。",
-                pray: "主耶穌，謝謝你應許永遠與我同在。當我寂寞時，求讓我感受你溫暖的擁抱。阿門。",
+                needs: "孤單是因為覺得沒人懂。耶穌經歷過最深的孤獨，祂現在正陪著你、聽你嘆息。",pray: "主耶穌，謝謝你應許永遠與我同在。當我寂寞時，求讓我感受你溫暖的擁抱。阿門。",
                 lovesYou: "想像耶穌正坐在旁邊聽你說話。告訴祂所有的瑣事，祂很樂意傾聽。"
             },
             { 
@@ -283,26 +282,28 @@
                                         </button>
                                     </div>
                                 ) : (
-                                    <div className="animate-in slide-in-from-bottom-4 duration-500">
-                                        <h3 className="text-orange-600 font-bold text-xl mb-3 flex items-center gap-2">
-                                            <span className="w-1.5 h-6 bg-orange-500 rounded-full"></span>
-                                            Pray
-                                        </h3>
-                                        <div className="bg-orange-50 p-8 rounded-[2rem] text-stone-800 text-lg leading-loose shadow-inner italic border border-orange-100">
-                                            {selectedItem.pray}
+                                    <div className="animate-in slide-in-from-bottom-4 duration-500 space-y-8">
+                                        <div>
+                                            <h3 className="text-orange-600 font-bold text-xl mb-3 flex items-center gap-2">
+                                                <span className="w-1.5 h-6 bg-orange-500 rounded-full"></span>
+                                                Pray
+                                            </h3>
+                                            <div className="bg-orange-50 p-8 rounded-[2rem] text-stone-800 text-lg leading-loose shadow-inner italic border border-orange-100">
+                                                {selectedItem.pray}
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <h3 className="text-orange-600 font-bold text-xl mb-3 flex items-center gap-2">
+                                                <span className="w-1.5 h-6 bg-orange-500 rounded-full"></span>
+                                                God loves you.
+                                            </h3>
+                                            <p className="text-lg text-stone-600 bg-white border border-stone-100 p-6 rounded-2xl shadow-sm">
+                                                {selectedItem.lovesYou}
+                                            </p>
                                         </div>
                                     </div>
                                 )}
-
-                                <div>
-                                    <h3 className="text-orange-600 font-bold text-xl mb-3 flex items-center gap-2">
-                                        <span className="w-1.5 h-6 bg-orange-500 rounded-full"></span>
-                                        God loves you.
-                                    </h3>
-                                    <p className="text-lg text-stone-600 bg-white border border-stone-100 p-6 rounded-2xl shadow-sm">
-                                        {selectedItem.lovesYou}
-                                    </p>
-                                </div>
                             </div>
 
                             <div className="mt-16 text-center border-t border-stone-100 pt-10">
@@ -377,4 +378,3 @@
         root.render(<App />);
     </script>
 </body>
-</html>
