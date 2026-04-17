@@ -168,4 +168,76 @@
 
                             <div className="mt-16 text-center border-t border-stone-100 pt-10">
                                 <button 
-                                    onClick={() => setView
+                                    onClick={() => setView<div className="mt-16 text-center border-t border-stone-100 pt-10">
+                                <button 
+                                    onClick={() => setView('list')}
+                                    className="bg-stone-100 text-stone-500 px-10 py-3 rounded-full font-medium hover:bg-stone-200 transition-all"
+                                >
+                                    Finish Reading
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                );
+            }
+
+            return (
+                <div className="max-w-4xl mx-auto px-4 py-12">
+                    <header className="text-center mb-16">
+                        <div className="flex justify-center items-center gap-4 mb-4">
+                            <span className="text-6xl drop-shadow-lg">📞</span>
+                            <h1 className="text-5xl font-black text-stone-900 tracking-tighter">打給耶穌的電話</h1>
+                        </div>
+                        <p className="text-stone-400 font-medium tracking-widest uppercase text-sm">A direct line to comfort and grace</p>
+                    </header>
+
+                    <div className="mb-10 flex flex-col md:flex-row gap-4">
+                        <input 
+                            className="flex-1 p-5 rounded-3xl bg-white border-2 border-stone-50 shadow-sm outline-none focus:border-orange-200 transition-all text-lg"
+                            placeholder="搜尋心情或關鍵字..."
+                            value={searchTerm}
+                            onChange={e => setSearchTerm(e.target.value)}
+                        />
+                        <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+                            {categories.map(cat => (
+                                <button 
+                                    key={cat}
+                                    onClick={() => setSelectedCategory(cat)}
+                                    className={`px-6 py-2 rounded-2xl whitespace-nowrap font-bold transition-all ${
+                                        selectedCategory === cat ? 'bg-orange-500 text-white shadow-lg scale-105' : 'bg-white text-stone-400 hover:bg-orange-50'
+                                    }`}
+                                >{cat}</button>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {filteredData.map(item => (
+                            <div 
+                                key={item.id} 
+                                onClick={() => handleItemClick(item)} 
+                                className="group bg-white p-8 rounded-[2.5rem] shadow-sm hover:shadow-2xl cursor-pointer border border-stone-50 transition-all transform hover:-translate-y-2 active:scale-95"
+                            >
+                                <div className="text-4xl mb-6 p-4 bg-orange-50 inline-block rounded-2xl group-hover:bg-orange-500 group-hover:rotate-6 transition-all">{item.icon}</div>
+                                <h3 className="font-bold text-2xl text-stone-800 mb-2">{item.title}</h3>
+                                <p className="text-stone-300 font-medium mb-8">{item.verse}</p>
+                                <div className="text-orange-500 font-black flex items-center gap-2 group-hover:gap-4 transition-all uppercase text-sm tracking-widest">
+                                    Call Now ➜
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    <footer className="mt-32 text-center text-stone-300">
+                        <div className="w-16 h-1 bg-orange-100 mx-auto mb-8 rounded-full"></div>
+                        <p className="italic">"呼求我，我就應允你。"</p>
+                    </footer>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
