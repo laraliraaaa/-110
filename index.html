@@ -20,91 +20,37 @@
     <script type="text/babel">
         const { useState, useMemo } = React;
 
-        // --- 🔑 API KEY 拼接區 ---
-        const p1 = "AQ.Ab8RN6KakIWQN7IZuaznaOS"; 
-        const p2 = "oM9QtzQNHcjHQwym6kgdE6ThunQ"; 
-        
-        const apiKey = p1.trim() + p2.trim(); 
-        // -----------------------
-
-; 
-
+        // 聖經數據資料庫：點擊後會直接跳轉到 BibleGateway 的對應頁面
         const scriptureData = [
-            { id: 1, title: "當你憂傷時", verse: "約翰福音 14", category: "情感慰藉", icon: "❤️" },
-            { id: 2, title: "當你犯了罪", verse: "詩篇 51", category: "認罪悔改", icon: "🛡️" },
-            { id: 3, title: "當你面對危難", verse: "詩篇 91", category: "安全保障", icon: "⚡" },
-            { id: 4, title: "當所有人令你失望", verse: "詩篇 27", category: "情感慰藉", icon: "👥" },
-            { id: 5, title: "當你覺得上帝離你很遠", verse: "詩篇 139", category: "信心建立", icon: "📍" },
-            { id: 6, title: "當你的信心需要鼓勵", verse: "希伯來書 11", category: "信心建立", icon: "☀️" },
-            { id: 7, title: "當你又孤單又懼怕時", verse: "詩篇 23", category: "情感慰藉", icon: "🛡️" },
-            { id: 8, title: "當你擔憂時", verse: "馬太福音 8:19-34", category: "情感慰藉", icon: "⚡" },
-            { id: 9, title: "當你受傷害，心懷不平時", verse: "哥林多前書 13", category: "人際關係", icon: "❤️" },
-            { id: 10, title: "當你懷疑基督信仰時", verse: "哥林多後書 5:15-18", category: "信心建立", icon: "📖" },
-            { id: 11, title: "當你覺得被遺棄時", verse: "羅馬書 8:31-39", category: "情感慰藉", icon: "📍" },
-            { id: 12, title: "當你尋找平安時", verse: "馬太福音 11:25-30", category: "情感慰藉", icon: "☀️" },
-            { id: 13, title: "當你覺得世界比上帝更大時", verse: "詩篇 90", category: "信心建立", icon: "⚡" },
-            { id: 14, title: "當你需要基督保障時", verse: "羅馬書 8:1-30", category: "信心建立", icon: "🛡️" },
-            { id: 15, title: "當你出門遠行時", verse: "詩篇 121", category: "生活引導", icon: "📍" },
-            { id: 16, title: "當你為自己禱告時", verse: "詩篇 87", category: "生活引導", icon: "📖" },
-            { id: 17, title: "當你需要勇氣完成工作時", verse: "約書亞記 1", category: "工作挑戰", icon: "💼" },
-            { id: 18, title: "當你思慮投資與生活時", verse: "馬可福音 10:17-31", category: "生活引導", icon: "💼" },
-            { id: 19, title: "當你心情低落時", verse: "詩篇 27", category: "情感慰藉", icon: "🌙" },
-            { id: 20, title: "當你經濟感到壓力時", verse: "詩篇 37", category: "生活引導", icon: "🛡️" },
-            { id: 21, title: "當你對所有人失去信心時", verse: "哥林多前書 13", category: "人際關係", icon: "👥" },
-            { id: 22, title: "當你覺得周圍人不友善時", verse: "約翰福音 15", category: "人際關係", icon: "👥" },
-            { id: 23, title: "當你失去盼望時", verse: "詩篇 126", category: "情感慰藉", icon: "☀️" },
-            { id: 24, title: "當你覺得世界比你小時", verse: "詩篇 19", category: "信心建立", icon: "⚡" },
-            { id: 25, title: "當你希望結出果子時", verse: "約翰福音 15", category: "信心建立", icon: "☀️" },
-            { id: 26, title: "保羅擁有的喜樂祕訣", verse: "歌羅西書 3:12-17", category: "情感慰藉", icon: "❤️" },
-            { id: 27, title: "當你碰到很好的機遇時", verse: "以賽亞書 55", category: "生活引導", icon: "⚡" },
-            { id: 28, title: "當你想與其他人睦相處時", verse: "羅馬書 12", category: "人際關係", icon: "👥" },
+            { id: 1, title: "當你憂傷時", verse: "約翰福音 14", category: "情感慰藉", icon: "❤️", url: "https://www.biblegateway.com/passage/?search=John+14&version=CUV" },
+            { id: 2, title: "當你犯了罪", verse: "詩篇 51", category: "認罪悔改", icon: "🛡️", url: "https://www.biblegateway.com/passage/?search=Psalm+51&version=CUV" },
+            { id: 3, title: "當你面對危難", verse: "詩篇 91", category: "安全保障", icon: "⚡", url: "https://www.biblegateway.com/passage/?search=Psalm+91&version=CUV" },
+            { id: 4, title: "當所有人令你失望", verse: "詩篇 27", category: "情感慰藉", icon: "👥", url: "https://www.biblegateway.com/passage/?search=Psalm+27&version=CUV" },
+            { id: 5, title: "當你覺得上帝離你很遠", verse: "詩篇 139", category: "信心建立", icon: "📍", url: "https://www.biblegateway.com/passage/?search=Psalm+139&version=CUV" },
+            { id: 6, title: "當你的信心需要鼓勵", verse: "希伯來書 11", category: "信心建立", icon: "☀️", url: "https://www.biblegateway.com/passage/?search=Hebrews+11&version=CUV" },
+            { id: 7, title: "當你又孤單又懼怕時", verse: "詩篇 23", category: "情感慰藉", icon: "🛡️", url: "https://www.biblegateway.com/passage/?search=Psalm+23&version=CUV" },
+            { id: 8, title: "當你擔憂時", verse: "馬太福音 8:19-34", category: "情感慰藉", icon: "⚡", url: "https://www.biblegateway.com/passage/?search=Matthew+8:19-34&version=CUV" },
+            { id: 9, title: "當你受傷害，心懷不平時", verse: "哥林多前書 13", category: "人際關係", icon: "❤️", url: "https://www.biblegateway.com/passage/?search=1+Corinthians+13&version=CUV" },
+            { id: 10, title: "當你懷疑基督信仰時", verse: "哥林多後書 5:15-18", category: "信心建立", icon: "📖", url: "https://www.biblegateway.com/passage/?search=2+Corinthians+5:15-18&version=CUV" },
+            { id: 11, title: "當你覺得被遺棄時", verse: "羅馬書 8:31-39", category: "情感慰藉", icon: "📍", url: "https://www.biblegateway.com/passage/?search=Romans+8:31-39&version=CUV" },
+            { id: 12, title: "當你尋找平安時", verse: "馬太福音 11:25-30", category: "情感慰藉", icon: "☀️", url: "https://www.biblegateway.com/passage/?search=Matthew+11:25-30&version=CUV" },
+            { id: 13, title: "當你覺得世界比上帝更大時", verse: "詩篇 90", category: "信心建立", icon: "⚡", url: "https://www.biblegateway.com/passage/?search=Psalm+90&version=CUV" },
+            { id: 14, title: "當你需要基督保障時", verse: "羅馬書 8:1-30", category: "信心建立", icon: "🛡️", url: "https://www.biblegateway.com/passage/?search=Romans+8:1-30&version=CUV" },
+            { id: 15, title: "當你出門遠行時", verse: "詩篇 121", category: "生活引導", icon: "📍", url: "https://www.biblegateway.com/passage/?search=Psalm+121&version=CUV" },
+            { id: 16, title: "當你為自己禱告時", verse: "詩篇 87", category: "生活引導", icon: "📖", url: "https://www.biblegateway.com/passage/?search=Psalm+87&version=CUV" },
+            { id: 17, title: "當你需要勇氣完成工作時", verse: "約書亞記 1", category: "工作挑戰", icon: "💼", url: "https://www.biblegateway.com/passage/?search=Joshua+1&version=CUV" },
+            { id: 18, title: "當你思慮投資與生活時", verse: "馬可福音 10:17-31", category: "生活引導", icon: "💼", url: "https://www.biblegateway.com/passage/?search=Mark+10:17-31&version=CUV" },
         ];
 
         const categories = ["全部", ...new Set(scriptureData.map(item => item.category))];
 
         const App = () => {
-            const [view, setView] = useState('list');
-            const [selectedItem, setSelectedItem] = useState(null);
             const [searchTerm, setSearchTerm] = useState("");
             const [selectedCategory, setSelectedCategory] = useState("全部");
-            const [scriptureContent, setScriptureContent] = useState("");
-            const [loading, setLoading] = useState(false);
-            const [error, setError] = useState(null);
-
-            const fetchScripture = async (item) => {
-                setLoading(true);
-                setError(null);
-                
-                const prompt = `請以溫柔且鼓勵的口吻，提供聖經經文「${item.verse}」的全文內容（和合本），並針對「${item.title}」這個情境，提供約 100 字的心靈導讀與禱告建議。請使用繁體中文。`;
-                
-                try {
-                    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            contents: [{ parts: [{ text: prompt }] }]
-                        })
-                    });
-                    
-                    const result = await response.json();
-                    const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
-                    if (text) {
-                        setScriptureContent(text);
-                    } else {
-                        throw new Error("無回傳內容");
-                    }
-                } catch (err) {
-                    setError("目前的連線可能有點擁擠，請確認 API Key 是否設定正確。");
-                } finally {
-                    setLoading(false);
-                }
-            };
 
             const handleItemClick = (item) => {
-                setSelectedItem(item);
-                setView('reading');
-                fetchScripture(item);
-                window.scrollTo(0, 0);
+                // 直接開啟新分頁並導向聖經網址
+                window.open(item.url, '_blank');
             };
 
             const filteredData = scriptureData.filter(item => {
@@ -113,36 +59,6 @@
                 return matchesSearch && matchesCategory;
             });
 
-            if (view === 'reading') {
-                return (
-                    <div className="max-w-2xl mx-auto p-4 py-10 min-h-screen">
-                        <button onClick={() => setView('list')} className="mb-6 flex items-center text-stone-500 hover:text-orange-500 font-medium transition-colors">
-                           ⬅️ 返回清單
-                        </button>
-                        <div className="bg-white p-6 md:p-10 rounded-3xl shadow-xl border border-stone-100">
-                            <div className="text-center mb-8">
-                                <div className="text-4xl mb-4">{selectedItem.icon}</div>
-                                <h2 className="text-2xl font-bold text-stone-900 mb-2">{selectedItem.title}</h2>
-                                <p className="text-orange-500 font-bold">{selectedItem.verse}</p>
-                            </div>
-                            <hr className="mb-8 border-stone-100" />
-                            {loading ? (
-                                <div className="text-center py-20">
-                                    <div className="animate-spin text-4xl mb-4">⏳</div>
-                                    <p className="text-stone-400">正在為您翻閱聖經...</p>
-                                </div>
-                            ) : error ? (
-                                <div className="text-center py-20 text-red-500">{error}</div>
-                            ) : (
-                                <div className="whitespace-pre-wrap leading-loose text-stone-700 text-lg">
-                                    {scriptureContent}
-                                </div>
-                            )}
-                        </div>
-                    </div>
-                );
-            }
-
             return (
                 <div className="max-w-4xl mx-auto px-4 py-12">
                     <header className="text-center mb-12">
@@ -150,7 +66,7 @@
                             <span className="text-5xl">📞</span>
                             <h1 className="text-4xl font-extrabold text-stone-900 tracking-tight">打給耶穌的電話</h1>
                         </div>
-                        <p className="text-stone-500 italic font-medium">"你要呼求我，我就應允你。" — 耶利米書 33:3</p>
+                        <p className="text-stone-500 italic font-medium">點擊下方卡片，直接翻開聖經尋求指引</p>
                     </header>
 
                     <div className="mb-10 flex flex-col md:flex-row gap-4">
@@ -184,7 +100,7 @@
                                 <h3 className="font-bold text-xl text-stone-800 mb-1">{item.title}</h3>
                                 <p className="text-stone-400 font-medium mb-6">{item.verse}</p>
                                 <div className="text-orange-500 font-bold flex items-center gap-1">
-                                    開始通話 ➜
+                                    閱讀經文 ➜
                                 </div>
                             </div>
                         ))}
@@ -192,6 +108,7 @@
 
                     <footer className="mt-20 text-center text-stone-300 text-sm">
                         <p>願每一句經文帶給你力量</p>
+                        <p className="mt-2"> Scripture source: BibleGateway</p>
                     </footer>
                 </div>
             );
